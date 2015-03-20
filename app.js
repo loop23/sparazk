@@ -4,11 +4,12 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+console.log("Before mongo");
 // New Code
 var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk(process.env.MONGOSOUP_URL);
+console.log("after mongo");
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
