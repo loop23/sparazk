@@ -1,0 +1,23 @@
+{
+  "name": "sparazk-heroku",
+  "version": "0.0.0",
+  "authors": [
+    "Luca de Marinis <loop23@gmail.com>"
+  ],
+  "description": "Sparaconcetti tanti anni dopo",
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.3"
+  }
+}
