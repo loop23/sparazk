@@ -70,3 +70,4 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
+console.log("Done with app");
