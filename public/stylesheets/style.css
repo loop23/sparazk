@@ -1,9 +1,8 @@
 body {
-  padding: 50px;
+  padding: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: black;
   color: white;
-  font-size: 90px;
 }
 a {
   color: #00B7FF;
@@ -14,9 +13,7 @@ a {
     left: 0;
     width: 99.7%;
     text-align: center;
-/*    margin-top: -50px;
-    margin-left: -50px;
-    width: 100px;
-    height: 100px;
-    border: 1px solid red; */
+    font-size: 130px;
 }
+
+body.hover { border: 10px dashed #333; }
