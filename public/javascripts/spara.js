@@ -1,25 +1,44 @@
 // Is the interface to something that returns strings one
 // at a time, via getNext
 var Spara = function() {
-  this.cc = ['This', 'Is', 'a', 'lame', 'test'];
+  this.buffers = [['0', 'This', 'Is', 'a', 'lame', 'test', 'buffer'],
+                  ['1', 'This', 'Is', 'a', 'lame', 'test', 'buffer', '1'],
+                  ['2', 'This', 'Is', 'a', 'lame', 'test', 'buffer', '2'],
+                  ['3'],
+                  ['4'],
+                  ['5'],
+                  ['6'],
+                  ['7'],
+                  ['8'],
+                  ['9'],
+                 ];
+  // Current buffer
+  this.cb = 0;
+  // Index within that
   this.idx = 0;
-  return this;
 };
 
 Spara.prototype.getNext = function() {
-  if (this.idx >= this.cc.length) this.idx = 0;
-  return this.cc[this.idx++];
+  if (this.idx >= this.buffers[this.cb].length) this.idx = 0;
+  return this.buffers[this.cb][this.idx++];
 };
 
 Spara.prototype.reset = function() {
   this.idx = 0;
 };
 
-Spara.prototype.setContent = function(txt) {
-  this.cc = this.tokenize(txt);
-  this.idx = 0;
+Spara.prototype.setContent = function(txt, buf) {
+  var bts = buf || this.cb;
+  this.buffers[bts] = this.tokenize(txt);
+  if (buf === undefined)
+    this.idx = 0;
 };
 
 Spara.prototype.tokenize = function(txt) {
   return txt.split(/\s+/);
+};
+
+Spara.prototype.setBuffer  = function(num) {
+  this.cb = num;
+  this.idx = 0;
 };
