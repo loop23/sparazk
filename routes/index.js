@@ -10,17 +10,21 @@ function randomStringAsBase64Url(size) {
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var newroom = randomStringAsBase64Url(20);
-  res.redirect('/spararoom?room=' + newroom);
+  res.redirect('/spararoom?help=true&room=' + newroom);
 });
 
 router.get('/spararoom*', function(req, res, next) {
   var room = req.query.room;
   if (room) {
-    console.log("Got room: ", room, "rendering");
-    res.render('index', { title: 'SparaZK - room:' + room });
+    var hidehelp = req.query.help != 'true';
+    console.log("Got room: ", room, "rendering, hidehelp: " + hidehelp);
+    res.render('index', { 'title': 'SparaZK - room:' + room,
+                          'room': room,
+                          'hidehelp': hidehelp });
   } else {
     res.redirect('/');
   }
+
 });
 
 /* GET Userlist page. */
@@ -32,6 +36,21 @@ router.get('/userlist', function(req, res) {
             "userlist" : docs
         });
     });
+});
+
+router.get("/getRoomContent", function(req, res) {
+  var room = req.query.room;
+  var db = req.db;
+  var collection = db.get("buffers");
+  console.log("Querying in room", room);
+  collection.find({room: room }, { num:true, content:true, room:false}, function(e,docs) {
+                    if (e) {
+                      console.log("Error in query.. sorry!");
+                    } else {
+                      console.log("Got docs", docs.length, "first? ", docs[0] );
+                      res.send(docs);
+                    }
+  });
 });
 
 /* GET New User page. */
@@ -61,6 +80,7 @@ router.post('/setBuffer', function(req, res) {
     }
   });
 });
+
 /* POST to Add User Service */
 router.post('/adduser', function(req, res) {
     // Set our internal DB variable

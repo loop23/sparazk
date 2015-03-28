@@ -3,17 +3,17 @@
 var Spara = function(room) {
   this.room = room;
   console.log("Initialized with room: %o", room);
-  this.buffers = [['0', 'This', 'Is', 'a', 'lame', 'test', 'buffer'],
-                  ['1', 'This', 'Is', 'a', 'lame', 'test', 'buffer', '1'],
-                  ['2', 'This', 'Is', 'a', 'lame', 'test', 'buffer', '2'],
+  this.buffers = [['buf0'],
+                  ['buf1'],
+                  ['buf22'],
                   ['3'],
                   ['4'],
                   ['5'],
                   ['6'],
                   ['7'],
                   ['8'],
-                  ['9'],
-                 ];
+                  ['9']];
+  this.getFromRemote();
   // Current buffer
   this.cb = 0;
   // Index within that
@@ -57,5 +57,25 @@ Spara.prototype.saveToRemote = function(bufnum) {
     console.log("Success");
   }).fail(function() {
     console.log("Failed!");
+  });
+};
+
+// Retrieves file in this->room remote
+Spara.prototype.getFromRemote = function() {
+  var sp = this;
+  console.log("Fetching from remote, this is: %o", sp);
+  $.get('/getRoomContent', {
+    'room': this.room
+  }, function(data) {
+    console.log("Got json data: %o", data);
+    $.each(data, function(item) {
+      var di = data[item];
+      console.log("Weird, %o, setting item: %i, sp: %o", di, di.num, sp);
+      sp.buffers[parseInt(di.num)] = di.content;
+    }).bind(this);
+  }).fail(function() {
+    console.log("Failed!");
+  }).always(function() {
+    console.log("Somehow finished");
   });
 };

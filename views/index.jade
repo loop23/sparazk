@@ -3,17 +3,19 @@ extends layout
 block content
   #main Initializing...
   #status Querying draggable availability
-  #help
-    h2 Usage
-    p
-      | Drag file to set content of current buffer; Drag files to set more buffers at once; The buffers are saved on the server, but not already retrieved
-      del  so that sharing the url is sharing the session
-    h2 Keyboard commands
-    ul
-      li h - Show/hide this
-      li 0-9 - Set buffer n
-      li
-        del &lt;tab&gt; Tap to set tempo
-      li s - stop/go
+  - if (hidehelp)
+    #help(style="display:none;")
+  - else
+    #help
+      h2 Uso
+      p
+        | Trascinare files verso l'alto dello schermo setta il contentuto del buffer corrente; Trascinare piu' file per settare piu' buffers (quasi funziona); I buffers vengono salvati sul server, quindi condividere la url condivide la sessione
+      h2 Tastiera
+      ul
+        li h - Mostra/nascondi questo help
+        li 0-9 - Usa buffer n
+        li
+          del &lt;tab&gt; Tap per settare il tempo
+        li s - stop/go
   button#gfs(onclick="$(document).fullScreen(true);$('#gfs').remove();")
-    | Get Fullscreen
+    | Fullscreen

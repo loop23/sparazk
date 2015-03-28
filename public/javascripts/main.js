@@ -10,7 +10,7 @@ if (typeof window.FileReader === 'undefined') {
   state.className = 'fail';
 } else {
   state.className = 'success';
-  state.innerHTML = 'File API & FileReader available, drag text files to change what is being shot';
+  state.innerHTML = ''; // File API & FileReader available, drag text files to change what is being shot';
 }
 
 holder.ondragover = function () { this.className = 'hover'; return false; };
@@ -37,9 +37,7 @@ for (var i = 0; i < 10; i++) {
 };
 
 function setBufKey(key) {
-  console.log("Setting %o", key);
   KeyboardJS.on(key.toString(), function() {
-    console.log("Setting buffer %i", key);
     SparaConcetti.spara.setBuffer(key);
   });
 }
