@@ -1,9 +1,8 @@
 console.log("Starting main");
 var SparaConcetti = {};
-SparaConcetti.spara = new Spara('23');
-console.log("spara setup");
+var roomNumber = window.location.href.match(/room=(.+)/)[1];
+SparaConcetti.spara = new Spara(roomNumber);
 SparaConcetti.vista = new Vista(SparaConcetti.spara, $('div#main'));
-console.log("vista setup");
 
 var holder = $('body')[0],
     state = $('#status')[0];

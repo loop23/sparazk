@@ -18,7 +18,8 @@
     "morgan": "~1.5.1",
     "serve-favicon": "~2.2.0",
     "mongodb": "*",
-    "monk": "*"
+    "monk": "*",
+    "node-base64-urlsafe": "*"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

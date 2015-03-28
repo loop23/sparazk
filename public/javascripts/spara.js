@@ -2,6 +2,7 @@
 // at a time, via getNext
 var Spara = function(room) {
   this.room = room;
+  console.log("Initialized with room: %o", room);
   this.buffers = [['0', 'This', 'Is', 'a', 'lame', 'test', 'buffer'],
                   ['1', 'This', 'Is', 'a', 'lame', 'test', 'buffer', '1'],
                   ['2', 'This', 'Is', 'a', 'lame', 'test', 'buffer', '2'],

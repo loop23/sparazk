@@ -1,9 +1,26 @@
 var express = require('express');
 var router = express.Router();
 
+/** Sync */
+function randomStringAsBase64Url(size) {
+  var crypto = require('crypto');
+  return require('node-base64-urlsafe').encode(crypto.randomBytes(size));
+}
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'SparaZK' });
+  var newroom = randomStringAsBase64Url(20);
+  res.redirect('/spararoom?room=' + newroom);
+});
+
+router.get('/spararoom*', function(req, res, next) {
+  var room = req.query.room;
+  if (room) {
+    console.log("Got room: ", room, "rendering");
+    res.render('index', { title: 'SparaZK - room:' + room });
+  } else {
+    res.redirect('/');
+  }
 });
 
 /* GET Userlist page. */
