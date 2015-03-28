@@ -2,6 +2,18 @@ extends layout
 
 block content
   #main Initializing...
-  #status Drag status
+  #status Querying draggable availability
+  #help
+    h2 Usage
+    p
+      | Drag file to set content of current buffer; Drag files to set more buffers at once
+      del The buffers are saved on the server, so that sharing the url is sharing the session
+    h2 Keyboard commands
+    ul
+      li h - Show/hide this
+      li 0-9 - Set buffer n
+      li
+        del &lt;tab&gt; Tap to set tempo
+      li s - stop/go
   button#gfs(onclick="$(document).fullScreen(true);$('#gfs').remove();")
-    Get Fullscreen
+    | Get Fullscreen
