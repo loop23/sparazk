@@ -1,6 +1,6 @@
 console.log("Starting main");
 var SparaConcetti = {};
-SparaConcetti.spara = new Spara();
+SparaConcetti.spara = new Spara('23');
 console.log("spara setup");
 SparaConcetti.vista = new Vista(SparaConcetti.spara, $('div#main'));
 console.log("vista setup");
@@ -65,4 +65,3 @@ $(function() {
     }, 50);
   }).resize();
 });
-console.log("Done with main!");

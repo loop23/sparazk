@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'SparaZK' });
 });
 
 /* GET Userlist page. */
@@ -22,6 +22,28 @@ router.get('/newuser', function(req, res) {
     res.render('newuser', { title: 'Add New User' });
 });
 
+router.post('/setBuffer', function(req, res) {
+  var db = req.db;
+  var bufnum = req.body.bufnum;
+  var room = req.body.room;
+  var content = JSON.parse(req.body.content);
+  var collection  = db.get('buffers');
+  collection.insert({
+    "room": room,
+    "num": bufnum,
+    "content": content
+  }, function (err, doc) {
+    if (err) {
+      // If it failed, return error
+      res.send("There was a problem adding the information to the database.");
+    } else {
+      // If it worked, set the header so the address bar doesn't still say /adduser
+      res.location("userlist");
+      // And forward to success page
+      res.redirect("userlist");
+    }
+  });
+});
 /* POST to Add User Service */
 router.post('/adduser', function(req, res) {
     // Set our internal DB variable
