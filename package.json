@@ -1,7 +1,19 @@
 {
   "name": "sparazk",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.0.1",
+  "description": "A reissue of the old SparaConcetti. It's a titler system for rave parties and events; You tell it what text files to play, and it plays them one word at a time",
+  "keywords": ["titler"],
+  "homepage": "https://github.com/loop23/sparazk",
+  "private": false,
+  "author": {
+    "name": "Luca (loop) de Marinis",
+    "url": "https://github.com/loop23"
+  },
+  "license": "GPL-2.0+",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/loop23/sparazk.git"
+  },
   "scripts": {
     "start": "node ./bin/www"
   },
