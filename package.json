@@ -31,7 +31,9 @@
     "serve-favicon": "~2.2.0",
     "mongodb": "*",
     "monk": "*",
-    "node-base64-urlsafe": "*"
+    "node-base64-urlsafe": "*",
+    "facebook-node-sdk": "*",
+    "passport-facebook-canvas": "*"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

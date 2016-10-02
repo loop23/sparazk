@@ -13,6 +13,20 @@ router.get('/', function(req, res, next) {
   res.redirect('/spararoom?help=true&room=' + newroom);
 });
 
+router.post('/', function(req, res, next) {
+  console.log("Asshole logged in from fb");
+  var room = req.query.room;
+  if (room) {
+    var hidehelp = req.query.help != 'true';
+    console.log("Got room: ", room, "rendering, hidehelp: " + hidehelp);
+    res.render('index', { 'title': 'SparaZK - room:' + room,
+                          'room': room,
+                          'hidehelp': hidehelp });
+  } else {
+    res.redirect('/');
+  }
+});
+
 router.get('/spararoom*', function(req, res, next) {
   var room = req.query.room;
   if (room) {
