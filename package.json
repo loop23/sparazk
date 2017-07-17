@@ -2,7 +2,9 @@
   "name": "sparazk",
   "version": "0.0.2",
   "description": "A reissue of the old SparaConcetti. It's a titler system for rave parties and events; You tell it what text files to play, and it plays them one word at a time",
-  "keywords": ["titler"],
+  "keywords": [
+    "titler"
+  ],
   "homepage": "https://github.com/loop23/sparazk",
   "private": false,
   "author": {
@@ -11,8 +13,8 @@
   },
   "license": "GPL-2.0+",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/loop23/sparazk.git"
+    "type": "git",
+    "url": "https://github.com/loop23/sparazk.git"
   },
   "scripts": {
     "start": "node ./bin/www"
@@ -25,14 +27,14 @@
     "cookie-parser": "~1.3.4",
     "debug": "~2.1.1",
     "express": "~4.12.2",
-    "pug": "~2.0.0-rc",
-    "morgan": "~1.5.1",
-    "serve-favicon": "~2.2.0",
+    "facebook-node-sdk": "*",
     "mongodb": "*",
     "monk": "*",
+    "morgan": "~1.5.1",
     "node-base64-urlsafe": "*",
-    "facebook-node-sdk": "*",
-    "passport-facebook-canvas": "*"
+    "passport-facebook-canvas": "*",
+    "pug": "^2.0.0-rc.2",
+    "serve-favicon": "~2.2.0"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
