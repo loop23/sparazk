@@ -6,13 +6,38 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: white;
 }
+.anaglyph {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  border: none;
+  /*font: normal 50px/normal "Chau Philomene One", Helvetica, sans-serif;*/
+  /* color: rgb(128, 128, 128); */
+  text-align: center;
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  letter-spacing: 3px;
+  text-shadow: -6px 0 2px rgb(30,242,241) , 6px 0 2px rgb(246,5,10) ;
+}
 a {
   color: #00B7FF;
+}
+#editor {
+  background-color: orange;
+  opacity: 0.8;
+  color: black;
+  padding: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-buffer: 11;
+  margin: auto;
 }
 #help {
     background-color: yellow;
     opacity: 0.5;
-    border-radius: 30px;
+    border-radius: 20px;
     color: black;
     padding: 20px;
     z-buffer: 10;
@@ -33,5 +58,13 @@ a {
   position: absolute;
   text-align: center;
   font-size: 120px;
+  font-weight: bold;
+
 }
 body.hover { border: 30px dashed #300; }
+ul li { list-style-type: none; }
+#bpm {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

@@ -1,6 +1,6 @@
 {
   "name": "sparazk",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A reissue of the old SparaConcetti. It's a titler system for rave parties and events; You tell it what text files to play, and it plays them one word at a time",
   "keywords": [
     "titler"
@@ -28,8 +28,9 @@
     "debug": "~2.1.1",
     "express": "~4.12.2",
     "facebook-node-sdk": "*",
+    "jquery": "^3.3.1",
     "mongodb": "*",
-    "monk": "*",
+    "monk": "^6.0.6",
     "morgan": "~1.5.1",
     "node-base64-urlsafe": "*",
     "passport-facebook-canvas": "*",

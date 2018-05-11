@@ -14,7 +14,8 @@ module.exports = function(grunt) {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
       build: {
-        src: 'bower_components/<%= pkg.name %>.js',
+        // src: 'bower_components/<%= pkg.name %>.js',
+        src: 'src/<%= pkg.name %>/*.js',
         dest: 'build/<%= pkg.name %>.min.js'
       }
     }

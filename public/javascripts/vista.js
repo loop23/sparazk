@@ -37,6 +37,10 @@ var Vista = function(spara, dom_id) {
      this.timerId = undefined;
     }
     this.timerId = window.setInterval(this.tick, 60000/this.bpm);
+    $('#bpm').html(this.bpm).fadeIn(40);
+    window.setTimeout(function() {
+      $('#bpm').fadeOut(40);
+    }, 40);
   };
   this.restartTimer();
   console.log("Initialized, timer: %i, dom_id: %o", this.timerId, dom_id);

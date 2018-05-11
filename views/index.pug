@@ -1,27 +1,44 @@
 extends layout.pug
 
 block content
-  #main Initializing...
+  #main Sto a parti'...
+  #bpm= 120
   #status Querying draggable availability
   - if (hidehelp)
     #help(style="display:none;")
   - else
     #help
       h2 Uso
-      p
-        | Trascinare files verso l'alto dello schermo setta il contentuto del buffer corrente; Trascinare piu' file per settare piu' buffers (quasi funziona); I buffers vengono salvati sul server, quindi condividere la url condivide la sessione
+      p Trascinare files verso l'alto dello schermo setta il contentuto del buffer corrente; Trascinare piu' file per settare piu' buffers (quasi funziona); I buffers vengono salvati sul server, quindi condividere la url condivide la sessione
       h2 Tastiera
-      ul
-        li h - Mostra/nascondi questo help
-        li e - Mostra/nascondi editor
-        li l - Lock on/off (resta sullo stesso buffer o va avanti quando ha finito)
-        li 0-9 - Usa buffer n
-        li
-          del &lt;tab&gt; Tap per settare il tempo
-        li s - stop/go
-      h2
+      table(style="text-align: left")
+        tr
+          th(width="20%") Tasto
+          th -
+        tr
+          td h
+          td Mostra/nascondi questo help
+        tr
+          td e
+          td Mostra/nascondi editor
+        tr
+          td l
+          td Lock on/off (resta sullo stesso buffer o va avanti quando ha finito)
+        tr
+          td d
+          td Pseudo 3D
+        tr
+          td 0-9
+          td Usa buffer n
+        tr
+          td +/-
+          td bpm +/-
+        tr
+          td s
+          td stop/go
+      // - h2
         a(href="https://github.com/loop23/sparazk") Github
-    #editor  // (style="display:none;");
+    #editor(style="display:none;")
       h2 Edit
       textarea#text-edit(cols=100 rows=40)
       button Salva

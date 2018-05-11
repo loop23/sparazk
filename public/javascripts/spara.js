@@ -15,7 +15,7 @@ var Spara = function(room) {
                   ['buf9']];
   this.getFromRemote();
   // Current buffer
-  this.cb = 0;
+  this.cb = 1;
   // Index within that
   this.idx = 0;
 };
@@ -29,7 +29,8 @@ Spara.prototype.reset = function() {
   this.idx = 0;
 };
 
-// Sets content of buf (current if not specified) to txt
+// Sets content of buf (current if not specified) to txt;
+// Invoked by drag
 Spara.prototype.setContent = function(txt, buf) {
   var bts = buf || this.cb;
   this.buffers[bts] = this.tokenize(txt);
@@ -42,10 +43,12 @@ Spara.prototype.tokenize = function(txt) {
   return txt.split(/\s+/);
 };
 
+// Changed buffer to n
 Spara.prototype.setBuffer  = function(num) {
   this.cb = num;
   this.idx = 0;
 };
+
 // Saves n buf to remote
 Spara.prototype.saveToRemote = function(bufnum) {
   console.log("Saving %i to remote, content: %o", bufnum, this.buffers[bufnum]);
@@ -60,22 +63,33 @@ Spara.prototype.saveToRemote = function(bufnum) {
   });
 };
 
-// Retrieves file in this->room remote
+// Retrieves file in this->room from remote
 Spara.prototype.getFromRemote = function() {
   var sp = this;
-  console.log("Fetching from remote, this is: %o", sp);
+  console.log("Loading from remote");
   $.get('/getRoomContent', {
     'room': this.room
   }, function(data) {
-    console.log("Got json data: %o", data);
-    $.each(data, function(item) {
-      var di = data[item];
-      console.log("Weird, %o, setting item: %i, sp: %o", di, di.num, sp);
-      sp.buffers[parseInt(di.num)] = di.content;
-    }).bind(this);
-  }).fail(function() {
-    console.log("Failed!");
+    console.log("Remote loaded");
+    data.forEach(function(item) {
+      var bufnum = parseInt(item.num);
+      console.log("Setting buffer num: %o to stuff starting with %o",
+                  bufnum,
+                  item.content[0]);
+      if (bufnum > 0)
+        sp.buffers[bufnum] = item.content;
+      else {
+        // Il buffer 0 e' quello dei ravers. Quindi appendiamo invece di
+        // sovrascrivere
+        if (!sp.buffers[bufnum])
+          sp.buffers[bufnum] = [];
+        sp.buffers[bufnum].push(item.content);
+      }
+    });
+  }).fail(function(err) {
+    console.log("Failed: %o", err);
   }).always(function() {
+    // Sarebbe il posto giusto per nascondere un loader!
     console.log("Somehow finished");
   });
 };

@@ -1,13 +1,17 @@
+// Entry point for express app. This is the stuff that runs on the server.
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-// New Code
+// Mongolism
 var mongo = require('mongodb');
 var monk = require('monk');
 var db = monk(process.env.MONGOSOUP_URL);
+db.then(() => {
+  console.log('Connected correctly to server');
+});
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
