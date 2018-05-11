@@ -5,14 +5,14 @@ var Spara = function(room) {
   console.log("Initialized with room: %o", room);
   this.buffers = [['buf0'],
                   ['buf1'],
-                  ['buf22'],
-                  ['3'],
-                  ['4'],
-                  ['5'],
-                  ['6'],
-                  ['7'],
-                  ['8'],
-                  ['9']];
+                  ['buf2'],
+                  ['buf3'],
+                  ['buf4'],
+                  ['buf5'],
+                  ['buf6'],
+                  ['buf7'],
+                  ['buf8'],
+                  ['buf9']];
   this.getFromRemote();
   // Current buffer
   this.cb = 0;

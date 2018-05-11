@@ -57,11 +57,14 @@ router.get("/getRoomContent", function(req, res) {
   var db = req.db;
   var collection = db.get("buffers");
   console.log("Querying in room", room);
-  collection.find({room: room }, { num:true, content:true, room:false}, function(e,docs) {
+  collection.find({room: room },
+                  { num:true,
+                    content:true,
+                    room:false }, function(e,docs) {
                     if (e) {
                       console.log("Error in query.. sorry!");
                     } else {
-                      console.log("Got docs", docs.length, "first? ", docs[0] );
+                      console.log("Got docs", docs.length, "first? ", docs[0]);
                       res.send(docs);
                     }
   });

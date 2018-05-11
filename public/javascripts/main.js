@@ -50,6 +50,20 @@ KeyboardJS.on('s', function() {
   SparaConcetti.vista.toggleSpara();
 });
 
+KeyboardJS.on('e', function() {
+  $('#editor').toggle();
+});
+
+KeyboardJS.on('l', function() {
+  SparaConcetti.spara.toggleLock();
+});
+KeyboardJS.on('plus', function() {
+  SparaConcetti.vista.speedPlus();
+});
+KeyboardJS.on('-', function() {
+  SparaConcetti.vista.speedMinus();
+});
+
 // Reposition text in center
 $(function() {
   $(window).on('resize', function resize()  {

@@ -13,12 +13,17 @@ block content
       h2 Tastiera
       ul
         li h - Mostra/nascondi questo help
+        li e - Mostra/nascondi editor
+        li l - Lock on/off (resta sullo stesso buffer o va avanti quando ha finito)
         li 0-9 - Usa buffer n
         li
           del &lt;tab&gt; Tap per settare il tempo
         li s - stop/go
       h2
         a(href="https://github.com/loop23/sparazk") Github
-
+    #editor  // (style="display:none;");
+      h2 Edit
+      textarea#text-edit(cols=100 rows=40)
+      button Salva
   button#gfs(onclick="$(document).fullScreen(true);$('#gfs').remove();")
     | Fullscreen

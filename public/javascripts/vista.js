@@ -1,22 +1,43 @@
 var Vista = function(spara, dom_id) {
   var show = false;
+  this.bpm = 180;
   this.tick = function() {
     if (show)
-      dom_id.text(spara.getNext()).fadeIn();
+      dom_id.text(spara.getNext()).fadeIn(30000/this.bpm/2);
     else
-      dom_id.fadeOut();
+      dom_id.fadeOut(30000/this.bpm/1.3);
     show = !show;
   }.bind(this);
-  this.timerId = window.setInterval(this.tick, 500);
   this.toggleSpara = function() {
     if (this.timerId) {
-      console.log("Was running");
+      console.log("Stopping");
       window.clearInterval(this.timerId);
       this.timerId = undefined;
     } else {
-      console.log("Was stopped");
-      this.timerId = window.setInterval(this.tick, 500);
+      console.log("Starting");
+      this.restartTimer();
     }
   };
+  this.speedPlus = function(amt) {
+    if (!amt) amt = 1;
+    this.bpm = this.bpm + amt;
+    if (this.bpm > 400) this.bpm = 400;
+    this.restartTimer();
+  };
+  this.speedMinus = function(amt) {
+    if (!amt) amt = 1;
+    this.bpm = this.bpm - amt;
+    if (this.bpm < 5) this.bpm = 5;
+    this.restartTimer();
+  };
+  this.restartTimer = function() {
+    console.log("Restarting, bpm to %o", this.bpm);
+    if (this.timerId) {
+     window.clearInterval(this.timerId);
+     this.timerId = undefined;
+    }
+    this.timerId = window.setInterval(this.tick, 60000/this.bpm);
+  };
+  this.restartTimer();
   console.log("Initialized, timer: %i, dom_id: %o", this.timerId, dom_id);
 };
