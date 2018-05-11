@@ -1,6 +1,7 @@
 var Vista = function(spara, dom_id) {
   var show = false;
   this.bpm = 180;
+  this.lastTap = null;
   this.tick = function() {
     if (show)
       dom_id.text(spara.getNext()).fadeIn(30000/this.bpm/2);
@@ -30,13 +31,25 @@ var Vista = function(spara, dom_id) {
     if (this.bpm < 5) this.bpm = 5;
     this.restartTimer();
   };
+  this.tapTempo = function() {
+    console.log("Tapping!");
+    var now = new Date().valueOf();
+    var tdiff = now - this.lastTap;
+    console.log("tdiff: %o", tdiff);
+    if (tdiff > 130 && tdiff < 2000) {
+      console.log("Sembra sensato, e' %o", tdiff);
+      this.bpm = 30000 / tdiff;
+      this.restartTimer();
+    };
+    this.lastTap = now;
+  },
   this.restartTimer = function() {
     console.log("Restarting, bpm to %o", this.bpm);
     if (this.timerId) {
      window.clearInterval(this.timerId);
      this.timerId = undefined;
     }
-    this.timerId = window.setInterval(this.tick, 60000/this.bpm);
+    this.timerId = window.setInterval(this.tick, 30000/this.bpm);
     $('#bpm').html(this.bpm).fadeIn(40);
     window.setTimeout(function() {
       $('#bpm').fadeOut(40);

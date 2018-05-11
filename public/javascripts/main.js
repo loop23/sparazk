@@ -55,7 +55,7 @@ KeyboardJS.on('s', function() {
 });
 
 KeyboardJS.on('e', function() {
-  $('#editor').toggle();
+  SparaConcetti.spara.showEditor();
 });
 
 KeyboardJS.on('l', function() {
@@ -66,6 +66,9 @@ KeyboardJS.on('plus', function() {
 });
 KeyboardJS.on('-', function() {
   SparaConcetti.vista.speedMinus();
+});
+KeyboardJS.on('t', function() {
+  SparaConcetti.vista.tapTempo();
 });
 
 // Reposition text in center

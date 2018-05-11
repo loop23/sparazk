@@ -20,6 +20,19 @@ var Spara = function(room) {
   this.idx = 0;
 };
 
+Spara.prototype.showEditor = function() {
+  console.log("showing.. %o %o", this.cb, this.buffers[this.cb]);
+  $('#text-edit').val(this.buffers[this.cb].join('\n'));
+  $('#editor').fadeIn();
+};
+
+Spara.prototype.salva = function() {
+  console.log("Saving!");
+  this.setContent($('#text-edit').val());
+  console.log("Set content");
+  $('#editor').fadeOut();
+};
+
 Spara.prototype.getNext = function() {
   if (this.idx >= this.buffers[this.cb].length) this.idx = 0;
   return this.buffers[this.cb][this.idx++];
@@ -29,8 +42,11 @@ Spara.prototype.reset = function() {
   this.idx = 0;
 };
 
+Spara.prototype.toggleLock = function() {
+  console.log("Invocata toggleLock");
+};
 // Sets content of buf (current if not specified) to txt;
-// Invoked by drag
+// Invoked by drag or Save
 Spara.prototype.setContent = function(txt, buf) {
   var bts = buf || this.cb;
   this.buffers[bts] = this.tokenize(txt);

@@ -90,9 +90,9 @@ router.post('/sendOne', function(req, res) {
   console.log("Inserisco %o in %o", text, room);
   var collection  = db.get('buffers');
   collection.insert({
-    "room": room,
-    "num": 0,
-    "content": text.split(/(\s+|\w{20}/)
+    room: room,
+    num: 0,
+    content: text.split(/(\s+|\w{20}/)
   }).then((docs) => {
     res.render('simple',
                {
@@ -103,7 +103,7 @@ router.post('/sendOne', function(req, res) {
   }).catch((err) => {
     console.log("wooops - %o", err);
     res.status(500).send({
-      error: 'Non sono riuscito ad inserire il testo.. peccato!'
+      error: 'Non sono riuscito ad inserire il testo.. sorry!'
     });
   });
 });

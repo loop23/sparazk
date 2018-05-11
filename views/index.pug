@@ -22,6 +22,9 @@ block content
           td e
           td Mostra/nascondi editor
         tr
+          td t
+          td Tap tempo
+        tr
           td l
           td Lock on/off (resta sullo stesso buffer o va avanti quando ha finito)
         tr
@@ -41,6 +44,6 @@ block content
     #editor(style="display:none;")
       h2 Edit
       textarea#text-edit(cols=100 rows=40)
-      button Salva
+      a(href="javascript:SparaConcetti.spara.salva('');") Salva
   button#gfs(onclick="$(document).fullScreen(true);$('#gfs').remove();")
     | Fullscreen
