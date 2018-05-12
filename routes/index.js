@@ -117,6 +117,7 @@ router.post('/setBuffer', function(req, res) {
   var content = req.body.content;
   var collection  = db.get('buffers');
   // Se c'e' gia', spianalo
+  console.log("Rimuovo in %o, num: %o", room, bufnum);
   collection.remove({ room: room,
                       num: bufnum }).then((docs) => {
                         console.log("rmoved! %o", docs.deletedCount);

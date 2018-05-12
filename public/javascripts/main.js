@@ -2,7 +2,6 @@ console.log("Starting main");
 var SparaConcetti = {
   // Funzione che smessaggia
   message: function(txt) {
-    console.log("mostro messagigo");
     $('#bpm').html(txt).show();
     window.setTimeout(function() {
       $('#bpm').fadeOut(100);
