@@ -1,5 +1,15 @@
 console.log("Starting main");
-var SparaConcetti = {};
+var SparaConcetti = {
+  // Funzione che smessaggia
+  message: function(txt) {
+    console.log("mostro messagigo");
+    $('#bpm').html(txt).show();
+    window.setTimeout(function() {
+      $('#bpm').fadeOut(100);
+    }, 300);
+  }
+};
+
 var roomNumber = window.location.href.match(/room=(.+)/)[1];
 SparaConcetti.spara = new Spara(roomNumber);
 SparaConcetti.vista = new Vista(SparaConcetti.spara, $('div#main'));
@@ -44,7 +54,7 @@ KeyboardJS.on('-', function() {
   SparaConcetti.vista.speedMinus();
 });
 
-if (!window.location.href.match(/sparasimple/)) {
+if (!window.location.href.match(/(sparasimple|sendOne)/)) {
   console.log("Non contiene sparasimple, setto tastiera");
   for (var i = 0; i < 10; i++) {
     setBufKey(i);
@@ -71,6 +81,10 @@ if (!window.location.href.match(/sparasimple/)) {
   });
   KeyboardJS.on('t', function() {
     SparaConcetti.vista.tapTempo();
+  });
+  KeyboardJS.on('r', function() {
+    SparaConcetti.spara.reload();
+    SparaConcetti.message("Reloaded");
   });
 }
 

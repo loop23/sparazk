@@ -3,14 +3,18 @@
 var Spara = function(room) {
   this.room = room;
   this.locked = true;
-  console.log("Initialized with room: %o", room);
-  this.buffers = [[],[],[],[],[],[],[],[],[],[]];
-  this.textBuffers = new Array(10);
-  this.getFromRemote();
+  this.reload();
   // Current buffer
   this.cb = 1;
   // Index within that
   this.idx = 0;
+};
+
+Spara.prototype.reload = function() {
+  console.log("reloading, reinitializing");
+  this.buffers = [[],[],[],[],[],[],[],[],[],[]];
+  this.textBuffers = ['', '', '', '', '', '', '', '', '', ''];
+  this.getFromRemote();
 };
 
 Spara.prototype.showEditor = function() {
@@ -38,8 +42,10 @@ Spara.prototype.getNext = function() {
   if (this.idx >= this.buffers[this.cb].length) {
     this.idx = 0;
     if (!this.locked) {
-      console.log("Setting next buffer: %o", this.cb);
       this.cb += 1;
+      if (this.cb == 10)
+        this.cb = 0;
+      console.log("Setting next buffer: %o", this.cb);
     }
   }
   return this.buffers[this.cb][this.idx++];
@@ -52,6 +58,7 @@ Spara.prototype.reset = function() {
 Spara.prototype.toggleLock = function() {
   console.log("Invocata toggleLock");
   this.locked = !this.locked;
+  SparaConcetti.message(this.locked ? 'Locked' : 'Unlocked');
 };
 
 // Sets content of buf (current if not specified) to txt;
@@ -61,18 +68,18 @@ Spara.prototype.setContent = function(txt, buf) {
   this.textBuffers[bts] = txt;
   this.buffers[bts] = this.tokenize(txt);
   this.saveToRemote(bts);
-  if (buf === undefined)
-    this.idx = 0;
+  this.idx = 0;
 };
 
 Spara.prototype.tokenize = function(txt) {
-  return txt.split(/(\s+)/);
+  return txt.split(/\s+/);
 };
 
 // Changed buffer to n
 Spara.prototype.changeBuffer  = function(num) {
   this.cb = num;
   this.idx = 0;
+  SparaConcetti.message("Buf: " + num);
 };
 
 // Saves n buf to remote

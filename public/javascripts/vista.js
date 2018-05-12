@@ -3,8 +3,10 @@ var Vista = function(spara, dom_id) {
   this.bpm = 180;
   this.lastTap = null;
   this.tick = function() {
-    if (show)
-      dom_id.text(spara.getNext()).fadeIn(30000/this.bpm/2);
+    if (show) {
+      var nt = spara.getNext();
+      dom_id.text(nt).fadeIn(30000/this.bpm/1.3);
+    }
     else
       dom_id.fadeOut(30000/this.bpm/1.3);
     show = !show;
@@ -48,10 +50,7 @@ var Vista = function(spara, dom_id) {
      this.timerId = undefined;
     }
     this.timerId = window.setInterval(this.tick, 30000/this.bpm);
-    $('#bpm').html(this.bpm).fadeIn(40);
-    window.setTimeout(function() {
-      $('#bpm').fadeOut(40);
-    }, 40);
+    SparaConcetti.message("BPM: " + this.bpm);
   };
   this.restartTimer();
   console.log("Initialized, timer: %i, dom_id: %o", this.timerId, dom_id);

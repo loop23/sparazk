@@ -4,50 +4,48 @@ block content
   #main Sto a parti'...
   #bpm= 120
   #status Querying draggable availability
-  - if (hidehelp)
-    #help(style="display:none;")
-  - else
-    #help
-      h2 Uso
-      p Trascinare files verso l'alto dello schermo setta il contentuto del buffer corrente; Trascinare piu' file per settare piu' buffers (quasi funziona); I buffers vengono salvati sul server, quindi condividere la url condivide la sessione
-      h2 Tastiera
-      table(style="text-align: left")
-        tr
-          th(width="20%") Tasto
-          th -
-        tr
-          td h
-          td Mostra/nascondi questo help
-        tr
-          td e
-          td Mostra/nascondi editor
-        tr
-          td t
-          td Tap tempo
-        tr
-          td l
-          td Lock on/off (resta sullo stesso buffer o va avanti quando ha finito)
-        tr
-          td d
-          td Pseudo 3D
-        tr
-          td 0-9
-          td Usa buffer n (0 e' quello pubblico)
-        tr
-          td +/-
-          td bpm +/-
-        tr
-          td s
-          td stop/go
-      // - h2
-        a(href="https://github.com/loop23/sparazk") Github
-    #editor(style="display:none;")
-      h2 Edit
-      #buf-num
-      textarea#text-edit(cols=100 rows=30)
-      br
-      a(href="javascript:SparaConcetti.spara.salva();") Salva
-      |  -
-      a(href="javascript:SparaConcetti.spara.abort();") Accanna
+  #help(style = hidehelp ? "display:none;" : '')
+    h2 Uso
+    p Trascinare files verso l'alto dello schermo setta il contentuto del buffer corrente; Trascinare piu' file per settare piu' buffers (quasi funziona); I buffers vengono salvati sul server, quindi condividere la url condivide la sessione
+    h2 Tastiera
+    table(style="text-align: left")
+      tr
+        th(width="20%") Tasto
+        th -
+      tr
+        td h
+        td Mostra/nascondi questo help
+      tr
+        td e
+        td Mostra/nascondi editor
+      tr
+        td r
+        td Reload (anche i contributi della ggente)
+      // -tr
+        td l
+        td Lock on/off (resta sullo stesso buffer o va avanti quando ha finito)
+      tr
+        td d
+        td Pseudo 3D
+      tr
+        td 0-9
+        td Usa buffer n (0 e' quello pubblico)
+      tr
+        td +/-
+        td bpm +/-
+      tr
+        td t
+        td Tap tempo
+      tr
+        td s
+        td stop/go
+  #editor(style="display:none;")
+    h2 Edit
+    #buf-num
+    textarea#text-edit(cols=100 rows=30)
+    br
+    a(href="javascript:SparaConcetti.spara.salva();") Salva
+    |  -
+    a(href="javascript:SparaConcetti.spara.abort();") Accanna
   button#gfs(onclick="$(document).fullScreen(true);$('#gfs').remove();")
     | Fullscreen
