@@ -8,9 +8,10 @@ block content
     - else
       h2 Inserisci una frase da sparare
     p Tutto avviene localmente (no internet) e non logghiamo nulla; Non possiamo dirti quando la tua frase verra' sparata, ma verra' sparata.
-    form(action="/sendOne" method="post")
+    - url = "/sendOne?room=666"
+    form(action=url method="post")
       input(type="hidden" name="room" value=room)
-      textarea#text-edit(cols=100 rows=40 name="text")
+      textarea#text-edit(cols=100 rows=6 name="text")
       input(type="submit" value="Invia")
   button#gfs(onclick="$(document).fullScreen(true);$('#gfs').remove();")
     | Fullscreen

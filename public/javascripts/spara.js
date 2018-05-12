@@ -2,17 +2,10 @@
 // at a time, via getNext
 var Spara = function(room) {
   this.room = room;
+  this.locked = true;
   console.log("Initialized with room: %o", room);
-  this.buffers = [['buf0'],
-                  ['buf1'],
-                  ['buf2'],
-                  ['buf3'],
-                  ['buf4'],
-                  ['buf5'],
-                  ['buf6'],
-                  ['buf7'],
-                  ['buf8'],
-                  ['buf9']];
+  this.buffers = [[],[],[],[],[],[],[],[],[],[]];
+  this.textBuffers = new Array(10);
   this.getFromRemote();
   // Current buffer
   this.cb = 1;
@@ -22,7 +15,9 @@ var Spara = function(room) {
 
 Spara.prototype.showEditor = function() {
   console.log("showing.. %o %o", this.cb, this.buffers[this.cb]);
-  $('#text-edit').val(this.buffers[this.cb].join('\n'));
+  KeyboardJS.disable();
+  $('#buf-num').html("Modifica buffer: " + this.cb);
+  $('#text-edit').val(this.textBuffers[this.cb]);
   $('#editor').fadeIn();
 };
 
@@ -31,10 +26,22 @@ Spara.prototype.salva = function() {
   this.setContent($('#text-edit').val());
   console.log("Set content");
   $('#editor').fadeOut();
+  KeyboardJS.enable();
+};
+
+Spara.prototype.abort = function() {
+  $('#editor').fadeOut();
+  KeyboardJS.enable();
 };
 
 Spara.prototype.getNext = function() {
-  if (this.idx >= this.buffers[this.cb].length) this.idx = 0;
+  if (this.idx >= this.buffers[this.cb].length) {
+    this.idx = 0;
+    if (!this.locked) {
+      console.log("Setting next buffer: %o", this.cb);
+      this.cb += 1;
+    }
+  }
   return this.buffers[this.cb][this.idx++];
 };
 
@@ -44,11 +51,14 @@ Spara.prototype.reset = function() {
 
 Spara.prototype.toggleLock = function() {
   console.log("Invocata toggleLock");
+  this.locked = !this.locked;
 };
+
 // Sets content of buf (current if not specified) to txt;
 // Invoked by drag or Save
 Spara.prototype.setContent = function(txt, buf) {
   var bts = buf || this.cb;
+  this.textBuffers[bts] = txt;
   this.buffers[bts] = this.tokenize(txt);
   this.saveToRemote(bts);
   if (buf === undefined)
@@ -56,11 +66,11 @@ Spara.prototype.setContent = function(txt, buf) {
 };
 
 Spara.prototype.tokenize = function(txt) {
-  return txt.split(/\s+/);
+  return txt.split(/(\s+)/);
 };
 
 // Changed buffer to n
-Spara.prototype.setBuffer  = function(num) {
+Spara.prototype.changeBuffer  = function(num) {
   this.cb = num;
   this.idx = 0;
 };
@@ -71,7 +81,7 @@ Spara.prototype.saveToRemote = function(bufnum) {
   $.post('/setBuffer', {
     'bufnum': bufnum,
     'room': this.room,
-    'content': JSON.stringify(this.buffers[bufnum])
+    'content': this.textBuffers[bufnum]
   }, function() {
     console.log("Success");
   }).fail(function() {
@@ -89,17 +99,17 @@ Spara.prototype.getFromRemote = function() {
     console.log("Remote loaded");
     data.forEach(function(item) {
       var bufnum = parseInt(item.num);
-      console.log("Setting buffer num: %o to stuff starting with %o",
+      console.log("Setting buffer num: %o to stuff, sized: %o",
                   bufnum,
-                  item.content[0]);
-      if (bufnum > 0)
-        sp.buffers[bufnum] = item.content;
-      else {
+                  item.content.length);
+      if (bufnum > 0) {
+        sp.textBuffers[bufnum] = item.content;
+        sp.buffers[bufnum] = sp.tokenize(item.content);
+      } else {
         // Il buffer 0 e' quello dei ravers. Quindi appendiamo invece di
         // sovrascrivere
-        if (!sp.buffers[bufnum])
-          sp.buffers[bufnum] = [];
-        sp.buffers[bufnum].push(item.content);
+        sp.textBuffers[0] = sp.textBuffers[0] + item.content;
+        sp.buffers[0] = sp.buffers[0].concat(sp.tokenize(item.content));
       }
     });
   }).fail(function(err) {

@@ -32,7 +32,7 @@ block content
           td Pseudo 3D
         tr
           td 0-9
-          td Usa buffer n
+          td Usa buffer n (0 e' quello pubblico)
         tr
           td +/-
           td bpm +/-
@@ -43,7 +43,11 @@ block content
         a(href="https://github.com/loop23/sparazk") Github
     #editor(style="display:none;")
       h2 Edit
-      textarea#text-edit(cols=100 rows=40)
-      a(href="javascript:SparaConcetti.spara.salva('');") Salva
+      #buf-num
+      textarea#text-edit(cols=100 rows=30)
+      br
+      a(href="javascript:SparaConcetti.spara.salva();") Salva
+      |  -
+      a(href="javascript:SparaConcetti.spara.abort();") Accanna
   button#gfs(onclick="$(document).fullScreen(true);$('#gfs').remove();")
     | Fullscreen

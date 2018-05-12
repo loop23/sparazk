@@ -32,12 +32,10 @@ var Vista = function(spara, dom_id) {
     this.restartTimer();
   };
   this.tapTempo = function() {
-    console.log("Tapping!");
     var now = new Date().valueOf();
     var tdiff = now - this.lastTap;
-    console.log("tdiff: %o", tdiff);
     if (tdiff > 130 && tdiff < 2000) {
-      console.log("Sembra sensato, e' %o", tdiff);
+      console.log("Sembra sensato, diff: %o", tdiff);
       this.bpm = 30000 / tdiff;
       this.restartTimer();
     };

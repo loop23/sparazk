@@ -32,44 +32,47 @@ holder.ondrop = function (e) {
   };
 };
 
-for (var i = 0; i < 10; i++) {
-  setBufKey(i);
-};
-
 function setBufKey(key) {
   KeyboardJS.on(key.toString(), function() {
-    SparaConcetti.spara.setBuffer(key);
+    SparaConcetti.spara.changeBuffer(key);
   });
 }
-
-KeyboardJS.on('h', function() {
-  $('#help').toggle();
-});
-
-KeyboardJS.on('d', function() {
-  $('#main').toggleClass('anaglyph');
-});
-
-KeyboardJS.on('s', function() {
-  SparaConcetti.vista.toggleSpara();
-});
-
-KeyboardJS.on('e', function() {
-  SparaConcetti.spara.showEditor();
-});
-
-KeyboardJS.on('l', function() {
-  SparaConcetti.spara.toggleLock();
-});
 KeyboardJS.on('plus', function() {
   SparaConcetti.vista.speedPlus();
 });
 KeyboardJS.on('-', function() {
   SparaConcetti.vista.speedMinus();
 });
-KeyboardJS.on('t', function() {
-  SparaConcetti.vista.tapTempo();
-});
+
+if (!window.location.href.match(/sparasimple/)) {
+  console.log("Non contiene sparasimple, setto tastiera");
+  for (var i = 0; i < 10; i++) {
+    setBufKey(i);
+  };
+
+  KeyboardJS.on('h', function() {
+    $('#help').toggle();
+  });
+
+  KeyboardJS.on('d', function() {
+    $('#main').toggleClass('anaglyph');
+  });
+
+  KeyboardJS.on('s', function() {
+    SparaConcetti.vista.toggleSpara();
+  });
+
+  KeyboardJS.on('e', function() {
+    SparaConcetti.spara.showEditor();
+  });
+
+  KeyboardJS.on('l', function() {
+    SparaConcetti.spara.toggleLock();
+  });
+  KeyboardJS.on('t', function() {
+    SparaConcetti.vista.tapTempo();
+  });
+}
 
 // Reposition text in center
 $(function() {

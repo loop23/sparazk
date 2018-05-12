@@ -11,7 +11,8 @@ function randomStringAsBase64Url(size) {
 router.get('/', function(req, res, next) {
   // var newroom = randomStringAsBase64Url(20);
   var newroom = 666;
-  res.redirect('/spararoom?help=true&room=' + newroom);
+  res.redirect('/sparasimple?room=' + newroom);
+  // res.redirect('/spararoom?help=true&room=' + newroom);
 });
 
 router.get('/sparasimple*', function(req, res, next) {
@@ -29,7 +30,7 @@ router.post('/', function(req, res, next) {
   if (room) {
     var hidehelp = req.query.help != 'true';
     console.log("Got room: ", room, "rendering, hidehelp: " + hidehelp);
-    res.render('index', { 'title': 'SparaZK - room:' + room,
+    res.render('index', { 'title': 'SparaConcetti Rave Edition - room:' + room,
                           'room': room,
                           'hidehelp': hidehelp });
   } else {
@@ -42,7 +43,7 @@ router.get('/spararoom*', function(req, res, next) {
   if (room) {
     var hidehelp = req.query.help != 'true';
     console.log("Got room: ", room, "rendering, hidehelp: " + hidehelp);
-    res.render('index', { 'title': 'SparaZK - room:' + room,
+    res.render('index', { 'title': 'SparaConcetti Rave Edition - room:' + room,
                           'room': room,
                           'hidehelp': hidehelp });
   } else {
@@ -92,7 +93,7 @@ router.post('/sendOne', function(req, res) {
   collection.insert({
     room: room,
     num: 0,
-    content: text.split(/(\s+|\w{20}/)
+    content: text
   }).then((docs) => {
     res.render('simple',
                {
@@ -113,7 +114,7 @@ router.post('/setBuffer', function(req, res) {
   var db = req.db;
   var bufnum = req.body.bufnum;
   var room = req.body.room;
-  var content = JSON.parse(req.body.content);
+  var content = req.body.content;
   var collection  = db.get('buffers');
   // Se c'e' gia', spianalo
   collection.remove({ room: room,
