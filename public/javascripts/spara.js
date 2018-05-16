@@ -72,9 +72,11 @@ Spara.prototype.setContent = function(txt, buf) {
 };
 
 Spara.prototype.tokenize = function(txt) {
-  console.log("fuck.. %o", txt);
   if (!txt) return [];
-  return txt.split(/\s+/);
+  if (typeof txt === 'object') return txt;
+  if (typeof txt === 'string') return txt.split(/\s+/);
+  console.log("Don't know how to tokenize: %o", txt);
+  return [];
 };
 
 // Changed buffer to n
