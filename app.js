@@ -8,9 +8,10 @@ var bodyParser = require('body-parser');
 // Mongolism
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk(process.env.MONGOSOUP_URL);
+var db = monk(process.env.MONGODB_URI);
 db.then(() => {
-  console.log('Connected correctly to server');
+  console.log('Connected correctly to mongodb server: %o',
+              process.env.MONGODB_URI);
 });
 
 var routes = require('./routes/index');
