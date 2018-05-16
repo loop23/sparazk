@@ -72,6 +72,7 @@ Spara.prototype.setContent = function(txt, buf) {
 };
 
 Spara.prototype.tokenize = function(txt) {
+  console.log("fuck.. %o", txt);
   if (!txt) return [];
   return txt.split(/\s+/);
 };
