@@ -72,7 +72,7 @@ Spara.prototype.setContent = function(txt, buf) {
 };
 
 Spara.prototype.tokenize = function(txt) {
-  return txt.split(/\s+/);
+  return (txt || '').split(/\s+/);
 };
 
 // Changed buffer to n
