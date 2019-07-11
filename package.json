@@ -40,6 +40,6 @@
     "grunt-bower-concat": "^1.0.0",
     "grunt-contrib-jshint": "^1.1.0",
     "grunt-contrib-uglify": "^3.3.0",
-    "lodash": "^4.17.5"
+    "lodash": "^4.17.13"
   }
 }
