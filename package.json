@@ -27,6 +27,7 @@
     "express": "^4.16.3",
     "facebook-node-sdk": "*",
     "jquery": "^3.3.1",
+    "lodash": "^4.17.15",
     "mongodb": "^3.0.8",
     "monk": "^6.0.6",
     "morgan": "^1.9.1",
@@ -39,7 +40,6 @@
     "grunt": "^1.0.2",
     "grunt-bower-concat": "^1.0.0",
     "grunt-contrib-jshint": "^1.1.0",
-    "grunt-contrib-uglify": "^3.3.0",
-    "lodash": "^4.17.13"
+    "grunt-contrib-uglify": "^3.3.0"
   }
 }
