@@ -9,10 +9,10 @@ function randomStringAsBase64Url(size) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  // var newroom = randomStringAsBase64Url(20);
-  var newroom = 666;
-  res.redirect('/sparasimple?room=' + newroom);
-  // res.redirect('/spararoom?help=true&room=' + newroom);
+  var newroom = randomStringAsBase64Url(20);
+  //var newroom = 666;
+  // res.redirect('/sparasimple?room=' + newroom);
+  res.redirect('/spararoom?help=true&room=' + newroom);
 });
 
 router.get('/sparasimple*', function(req, res, next) {
