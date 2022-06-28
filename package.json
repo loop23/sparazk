@@ -30,16 +30,14 @@
     "jquery": "^3.5.0",
     "lodash": "^4.17.21",
     "minimist": "^1.2.3",
-    "mongodb": "^3.0.8",
-    "monk": "^6.0.6",
+    "mongodb": "^3.1.13",
+    "monk": "^7.3.4",
     "morgan": "^1.9.1",
     "node-base64-urlsafe": "*",
     "passport-facebook-canvas": "*",
     "pug": "^3.0.1",
     "serve-favicon": "^2.5.0",
-    "acorn": "^5.7.4",
-    "minimist": "^1.2.3"
-
+    "underscore.string": "^3.3.5"
   },
   "devDependencies": {
     "bower": "^1.8.8",
