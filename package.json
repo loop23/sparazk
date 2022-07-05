@@ -40,10 +40,10 @@
     "underscore.string": "^3.3.5"
   },
   "devDependencies": {
-    "bower": "^1.8.8",
+    "bower": "^1.8.14",
     "grunt": "^1.0.2",
     "grunt-bower-concat": "^1.0.0",
-    "grunt-contrib-jshint": "^1.1.0",
-    "grunt-contrib-uglify": "^3.3.0"
+    "grunt-contrib-jshint": "^3.2.0",
+    "grunt-contrib-uglify": "^5.2.2"
   }
 }
