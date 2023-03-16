@@ -41,6 +41,9 @@
   },
   "devDependencies": {
     "bower": "^1.8.14",
+    "eslint": "^7.32.0 || ^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.2",
     "grunt": "^1.0.2",
     "grunt-bower-concat": "^1.0.0",
     "grunt-contrib-jshint": "^3.2.0",
