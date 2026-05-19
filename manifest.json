@@ -1,0 +1,15 @@
+{
+    "name": "Sparaconcetti Bad Trip edition",
+    "short_name": "Sparaconcetti",
+    "description": "L'ultima e migliore sparaconcetti di sempre, realizzata come PWA appositamente in memoria del Professor Bad Trip",
+    "start_url": "./",
+    "background_color": "black",
+  "icons": [
+    {
+      "src": "sparaconcetti.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "display": "standalone"
+}
