@@ -1,3 +1,6 @@
+console.log("spara.js");
+
+
 // Is the interface to something that returns strings one
 // at a time, via getNext
 var Spara = function(room) {
@@ -88,7 +91,8 @@ Spara.prototype.changeBuffer  = function(num) {
 
 // Saves n buf to remote
 Spara.prototype.saveToRemote = function(bufnum) {
-  console.log("Saving %i to remote, content: %o", bufnum, this.buffers[bufnum]);
+  console.log("Not really Saving %i to remote, content: %o", bufnum, this.buffers[bufnum]);
+  return;
   $.post('/setBuffer', {
     'bufnum': bufnum,
     'room': this.room,
@@ -103,7 +107,8 @@ Spara.prototype.saveToRemote = function(bufnum) {
 // Retrieves file in this->room from remote
 Spara.prototype.getFromRemote = function() {
   var sp = this;
-  console.log("Loading from remote");
+  console.log("Not Loading from remote");
+  return;
   $.get('/getRoomContent', {
     'room': this.room
   }, function(data) {

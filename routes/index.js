@@ -13,15 +13,8 @@ function randomStringAsBase64Url(size) {
 router.get('/', (req, res) => {
   const newroom = urlsafe.randomStringAsBase64Url(20);
   // var newroom = 666;
-  // res.redirect('/sparasimple?room=' + newroom);
-  res.redirect(`/spararoom?help=true&room=${newroom}`);
-});
 
-router.get('/sparasimple*', ({ req: { query: { room } } }, res, next) => {
-  res.render('simple', {
-    title: `SparaConcetti Rave Edition - room: ${room}`,
-    room: room,
-  });
+  res.redirect(`/spararoom?help=true&room=${newroom}`);
 });
 
 router.post('/', ({ req: { query: { room, help } } }, res) => {
@@ -53,18 +46,6 @@ router.get('/spararoom*', ({ req: { query: { room, help } } }, res) => {
   }
 });
 
-/* GET Userlist page. */
-/*
-router.get('/userlist', function(req, res) {
-  var db = req.db;
-  var collection = db.get('usercollection');
-  collection.find({},{},function(e,docs){
-    res.render('userlist', {
-      'userlist' : docs
-    });
-  });
-});
-*/
 router.get('/getRoomContent', ({
   req: {
     query: {
@@ -82,38 +63,8 @@ router.get('/getRoomContent', ({
   });
 });
 
-/* GET New User page. */
-/*
-router.get('/newuser', function(req, res) {
-  res.render('newuser', { title: 'Add New User' });
-});
-*/
-// Questa e' usata dalla simple. Non cancella
-router.post('/sendOne', (req, res) => {
-  const db = req.db;
-  const room = req.body.room || 666;
-  const text = req.body.text;
-  // console.log('Inserisco %o in %o', text, room);
-  const collection = db.get('buffers');
-  collection.insert({
-    room,
-    num: 0,
-    content: text,
-  }).then((docs) => {
-    res.render('simple', {
-      title: `SparaConcetti Rave Edition - room: ${room}`,
-      room,
-      message: 'Frase registrata, pronti a sparare!',
-    });
-  }).catch((err) => {
-    console.log('wooops - %o', err);
-    res.status(500).send({
-      error: 'Non sono riuscito ad inserire il testo.. sorry!',
-    });
-  });
-});
 
-// Questa e' invocata dalla console principale; no simple
+// Questa e' invocata dalla console principale
 router.post('/setBuffer', (req, res) => {
   const db = req.db;
   const bufnum = req.body.bufnum;

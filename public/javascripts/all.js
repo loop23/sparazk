@@ -1,3 +1,4 @@
+console.log("all.js");
 /**
  * Title: KeyboardJS
  * Version: v0.4.1

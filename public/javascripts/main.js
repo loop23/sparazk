@@ -1,4 +1,5 @@
 console.log("Starting main");
+
 var SparaConcetti = {
   // Funzione che smessaggia
   message: function(txt) {
@@ -9,7 +10,13 @@ var SparaConcetti = {
   }
 };
 
-var roomNumber = window.location.href.match(/room=(.+)/)[1];
+var roomNumber;
+try {
+  roomNumber = window.location.href.match(/room=(.+)/)[1];
+} catch(error) {
+  roomNumber = 0;
+}
+
 SparaConcetti.spara = new Spara(roomNumber);
 SparaConcetti.vista = new Vista(SparaConcetti.spara, $('div#main'));
 

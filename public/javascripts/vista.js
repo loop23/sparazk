@@ -1,3 +1,5 @@
+console.log("Vista");
+
 var Vista = function(spara, dom_id) {
   var show = false;
   this.bpm = 180;
