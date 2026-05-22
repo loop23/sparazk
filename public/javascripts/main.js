@@ -1,11 +1,14 @@
 console.log("Starting main");
 
+// Oggetto top level, ha spara, vista e func message
 var SparaConcetti = {
   // Funzione che smessaggia
   message: function(txt) {
-    $('#bpm').html(txt).show();
+    var messageDiv = $('#message');
+    console.log("Trovato %o", messageDiv);
+    messageDiv.html(txt).show();
     window.setTimeout(function() {
-      $('#bpm').fadeOut(100);
+      messageDiv.fadeOut(1000);
     }, 300);
   }
 };
@@ -34,6 +37,7 @@ if (typeof window.FileReader === 'undefined') {
 holder.ondragover = function () { this.className = 'hover'; return false; };
 holder.ondragend = function () { this.className = ''; return false; };
 holder.ondrop = function (e) {
+  console.log("Dropped something");
   this.className = '';
   e.preventDefault();
   for (var i = 0; i < e.dataTransfer.files.length; i++) {
@@ -85,7 +89,7 @@ if (!window.location.href.match(/(sparasimple|sendOne)/)) {
   KeyboardJS.on('l', function() {
     SparaConcetti.spara.toggleLock();
   });
-  KeyboardJS.on('t', function() {
+  KeyboardJS.on(' ', function() {
     SparaConcetti.vista.tapTempo();
   });
   KeyboardJS.on('r', function() {

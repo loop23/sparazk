@@ -1,9 +1,12 @@
 console.log("Vista");
 
 var Vista = function(spara, dom_id) {
+  console.log("Initializing Vista with %o", spara);
   var show = false;
+  this.spara = spara
   this.bpm = 180;
   this.lastTap = null;
+
   this.tick = function() {
     if (show) {
       var nt = spara.getNext();
@@ -46,7 +49,7 @@ var Vista = function(spara, dom_id) {
     this.lastTap = now;
   },
   this.restartTimer = function() {
-    console.log("Restarting, bpm to %o", this.bpm);
+    console.log("Restarting timer, bpm is %o", this.bpm);
     if (this.timerId) {
      window.clearInterval(this.timerId);
      this.timerId = undefined;

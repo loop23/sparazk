@@ -1,9 +1,13 @@
+// This is from the example PWA. May steal something
+
 // create constants for the form and the form controls
 
 const newPeriodFormEl = document.getElementsByTagName("form")[0];
 const startDateInputEl = document.getElementById("start-date");
 const endDateInputEl = document.getElementById("end-date");
 const pastPeriodContainer = document.getElementById("past-periods");
+
+/*
 
 // Listen to form submissions.
 newPeriodFormEl.addEventListener("submit", (event) => {
@@ -120,3 +124,6 @@ function formatDate(dateString) {
 
 renderPastPeriods();
 
+
+
+*/

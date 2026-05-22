@@ -9,69 +9,73 @@
 
   </head>
   <body>
-    <h1>Sparaconcetti bad trip version</h1>
+    <div id="messages">120</div>
     <div id="main">Sto a parti'...</div>
-    <div id="bpm">120</div>
+
     <div id="status">Querying draggable availability</div>
-    <div id="help"> <!--(style = hidehelp ? "display:none;" : '')-->
+    <div id="help">
       <h2>Uso</h2>
       <p>Trascinare files verso l'alto dello schermo setta il contentuto del buffer corrente; Trascinare piu' file per settare piu' buffers (quasi funziona); I buffers vengono salvati sul server, quindi condividere la url condivide la sessione</p>
-    <h3>Tastiera</h3>
-    <table style="text-align: left">
-      <tr>
-        <th width="20%">Tasto</th>
-        <th> - </th>
-      <tr>
-        <td> h</td>
-        <td> Mostra/nascondi questo help</td>
-      </tr>
-      <tr>
-        <td> e</td>
-        <td> Mostra/nascondi editor</td>
-      </tr>
-      <tr>
-        <td> r</td>
-        <td> Reload (anche i contributi della ggente)</td>
-      </tr>
-      <tr>
-        <td> l </td>
-	<td> Lock on/off (resta sullo stesso buffer o va avanti quando ha finito)</td>
-      </tr>
-      <tr>
-        <td> d</td>
-        <td> Pseudo 3D</td>
-      </tr>
-      <tr>
-        <td> 0-9</td>
-        <td> Usa buffer n (0 pubblico) </td>
-      </tr>
-      <tr>
-        <td> +/-</td>
-        <td> bpm +/-</td>
-      </tr>
-      <tr>
-        <td> t</td>
-        <td> Tap tempo</td>
-      </tr>
-      <tr|>
-        <td> s</td>
-	<td> stop/go</td>
-      </tr>
-    <h3>
-      <a href="https://github.com/loop23/sparazk">Github</a>
+      <h3>Tastiera</h3>
+      <table style="text-align: left">
+	<tr>
+          <th width="20%">Tasto</th>
+          <th> - </th>
+	<tr>
+          <td> h</td>
+          <td> Mostra/nascondi questo help</td>
+	</tr>
+	<tr>
+          <td> e</td>
+          <td> Mostra/nascondi editor</td>
+	</tr>
+	<tr>
+          <td> r</td>
+          <td> Reload (anche i contributi della ggente)</td>
+	</tr>
+	<tr>
+          <td> l </td>
+	  <td> Lock on/off (resta sullo stesso buffer o va avanti quando ha finito)</td>
+	</tr>
+	<tr>
+          <td> d</td>
+          <td> Pseudo 3D</td>
+	</tr>
+	<tr>
+          <td> 0-9</td>
+          <td> Usa buffer n (0 pubblico) </td>
+	</tr>
+	<tr>
+          <td> +/-</td>
+          <td> bpm +/-</td>
+	</tr>
+	<tr>
+          <td><Space></td>
+          <td>Tap tempo</td>
+	</tr>
+	<tr|>
+          <td>s</td>
+	  <td>stop/go</td>
+	</tr>
+      </table>
+      <h3>
+	<a href="https://github.com/loop23/sparazk">Github</a>
+      </h3>
+    </div>
     <div id="editor">
       <h2> Edit</h2>
       <div id="buf-num">
 	<textarea id="text-edit" cols=100 rows=30></textarea>
       </div>
+      <a href="javascript:SparaConcetti.spara.salva();"> Salva</a>
+      -
+      <a href="javascript:SparaConcetti.spara.abort();"> Accanna</a>
     </div>
-    <a href="javascript:SparaConcetti.spara.salva();"> Salva</a>
-    |  -
-    <a href="javascript:SparaConcetti.spara.abort();"> Accanna</a>
-       
-    <button id="gfs" onclick="$(document).fullScreen(true);$('#gfs').remove();"></button>
-    | Fullscreen
-
+    <!--
+	<button id="gfs" onclick="window.spara$(document).fullScreen(true);$('#gfs').remove();">Fullscreen</button>
+	-->
+    <!--
+	Form from example PWA. May need it to steal code
     <form id="form">
       <fieldset>
         <legend>Enter your period start and end date</legend>
@@ -89,14 +93,14 @@
       </p>
     </form>
     <section id="past-periods"></section>
-
+    -->
     <script
       src="https://code.jquery.com/jquery-3.7.1.min.js"
       integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
       crossorigin="anonymous">
     </script>
     
-    <script src="app.js" defer></script>
+    <!-- <script src="app.js" defer></script> -->
 
     <script src="public/javascripts/all.js" defer unsafe-eval></script>
     <script src="public/javascripts/spara.js" defer unsafe-eval></script>
