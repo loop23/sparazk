@@ -43,14 +43,15 @@ Spara = function(room) {
   };
 
   this.showEditor = function() {
+    document.querySelector('#editor').style.display = 'block';
     KeyboardJS.disable();
     this.toggleLock(true); // otherwise it keeps going!
     var btext = this.currentBuffer().text;
-    $('#editor').show();    
     console.log("editing number %o %o", this.currentBufferNum, btext);
-    var te = document.getElementById('text-edit');
-    console.log("got text edit textarea?? %o", te);
-    te.innerHTML = btext;
+    var te = document.querySelector('#text-edit');
+    te.value = btext;
+    te.innerText = btext;
+    console.log("quindi vale? %o", te.value);
   };
 
   this.saveClicked = function() {
@@ -70,7 +71,7 @@ Spara = function(room) {
   };
 
   this.closeEditor = function() {
-    $('#editor').fadeOut();
+    document.getElementById('editor').style.display = 'none';
     KeyboardJS.enable();
   }
 

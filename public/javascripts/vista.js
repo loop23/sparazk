@@ -4,7 +4,7 @@ var Vista = function(spara, dom_id) {
   console.log("Initializing Vista with %o, acting on %o", spara, dom_id);
   var show = false;
   this.spara = spara
-  this.bpm = 10;
+  this.bpm = 60;
   this.lastTap = null;
 
   this.tick = function() {
@@ -63,7 +63,5 @@ var Vista = function(spara, dom_id) {
     this.timerId = window.setInterval(this.tick, 30000/this.bpm);
     SparaConcetti.message("BPM: " + this.bpm);
   };
-
   this.restartTimer();
-  console.log("Initialized, timer: %i, dom_id: %o", this.timerId, dom_id);
 };
