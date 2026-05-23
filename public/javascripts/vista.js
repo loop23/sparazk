@@ -1,7 +1,7 @@
 console.log("Vista");
 
 var Vista = function(spara, dom_id) {
-  console.log("Initializing Vista with %o", spara);
+  console.log("Initializing Vista with %o, acting on %o", spara, dom_id);
   var show = false;
   this.spara = spara
   this.bpm = 10;
