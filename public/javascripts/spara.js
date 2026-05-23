@@ -11,7 +11,7 @@ Spara = function(room) {
   this.currentBufferNum = 1;
   this.buffers = [];
   for (i = 0; i<10; i++) {
-    this.buffers.push(new SparaBuffer(`${i}Buffer ${i}Eccolo ${i}Qua'`));
+    this.buffers.push(new SparaBuffer(`Buffer-${i}-vuoto!`));
   }
 
   this.currentBuffer = function() {
