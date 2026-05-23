@@ -46,12 +46,12 @@ holder.ondrop = function (e) {
   this.className = '';
   e.preventDefault();
   for (var i = 0; i < e.dataTransfer.files.length; i++) {
-    var file = e.dataTransfer.files[i],
-        reader = new FileReader();
+    var file = e.dataTransfer.files[i];
+    var reader = new FileReader();
     reader.onload = function (event) {
       SparaConcetti.spara.setContent(event.target.result, i);
     };
-    console.log(file);
+    // console.log(file);
     reader.readAsText(file,"UTF-8");
     return false;
   };
@@ -93,7 +93,8 @@ KeyboardJS.on('l', function() {
   SparaConcetti.spara.toggleLock();
 });
 
-KeyboardJS.on('t', function() {
+KeyboardJS.on('t', function(e) {
+  // e.preventDefault();
   SparaConcetti.vista.tapTempo();
 });
 
