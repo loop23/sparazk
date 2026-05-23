@@ -4,12 +4,17 @@ console.log("Starting main");
 var SparaConcetti = {
   // Funzione che smessaggia
   message: function(txt) {
+    //var messageDiv = document.getElementById('message');
     var messageDiv = $('#message');
     console.log("Trovato %o", messageDiv);
+    if (!messageDiv) {
+      console.log("didn't find #message");
+      return;
+    }
     messageDiv.html(txt).show();
     window.setTimeout(function() {
       messageDiv.fadeOut(1000);
-    }, 300);
+    }, 100);
   }
 };
 
@@ -89,7 +94,7 @@ if (!window.location.href.match(/(sparasimple|sendOne)/)) {
   KeyboardJS.on('l', function() {
     SparaConcetti.spara.toggleLock();
   });
-  KeyboardJS.on(' ', function() {
+  KeyboardJS.on('t', function() {
     SparaConcetti.vista.tapTempo();
   });
   KeyboardJS.on('r', function() {

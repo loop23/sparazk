@@ -1,19 +1,5 @@
 console.log("spara.js");
 
-class Buffer {
-  constructor(text) {
-    this.text = text;
-    this.tokens = this.tokenize(text)
-    this.idx = 0;
-  }
-  tokenize(txt) {
-    if (!txt) return [];
-    if (typeof txt === 'object') return txt;
-    if (typeof txt === 'string') return txt.split(/\s+/);
-    console.log("Don't know how to tokenize: %o", txt);
-    return [];
-  }
-};
 
 // Is the interface to something that returns strings one
 // at a time, via getNext
@@ -22,96 +8,100 @@ Spara = function(room) {
   this.locked = true;
   // this.reload();
   // Current buffer
-  this.currentBuffer = 1;
-  // Index within that
-  this.idx = 0;
-  this.buffers = [[],[],[],[],[],[],[],[],[],[]];
-  this.textBuffers = ['', '', '', '', '', '', '', '', '', ''];
+  this.currentBufferNum = 1;
+  this.buffers = [];
+  for (i = 0; i<10; i++) {
+    this.buffers.push(new SparaBuffer(`${i}Buffer ${i}Eccolo ${i}Qua'`));
+  }
+
+  this.currentBuffer = function() {
+    return this.buffers[this.currentBufferNum];
+  }
 
   this.getNext = function() {
-    console.log("in getNext, ho currentBuffer? %o", this.currentBuffer);
-    if (this.idx >= this.buffers[this.currentBuffer].length) {
-      this.idx = 0;
-      if (!this.locked) {
-	this.currentBuffer += 1;
-	if (this.currentBuffer == 10)
-          this.currentBuffer = 0;
-	console.log("Setting next buffer: %o", this.currentBuffer);
-      }
+    // console.log("in getNext, ho currentBufferNum? %o", this.currentBufferNum);
+    var next = this.currentBuffer().getNext();
+    if (next) {
+      return next;
     }
-    return this.buffers[this.currentBuffer][this.idx++];
+    if (!this.locked) {
+      console.log("not locked tutto da vedere!");
+      this.currentBufferNum += 1;
+      if (this.currentBufferNum == 10)
+        this.currentBufferNum = 0;
+      console.log("Setting next buffer: %o", this.currentBufferNum);
+    }
+    return this.currentBuffer().getNext();
   };
 
   // textBuffers is the buffer as text (useful for editing) while
   // buffers is the tokenized, array of strings one. God that sucks so much!
   this.reload = function() {
     console.log("reloading, reinitializing");
-    this.buffers = [[],[],[],[],[],[],[],[],[],[]];
-    this.textBuffers = ['', '', '', '', '', '', '', '', '', ''];
+    this.buffers = [];
     this.getFromRemote();
   };
 
   this.showEditor = function() {
-    var btext = this.buffers[this.currentBuffer];
-    $('#editor').show();    
-    console.log("showing.. %o %o", this.currentBuffer, btext);
     KeyboardJS.disable();
-    // $('#buf-num').html("Modifica buffer: " + this.currentBuffer);
+    this.toggleLock(true); // otherwise it keeps going!
+    var btext = this.currentBuffer().text;
+    $('#editor').show();    
+    console.log("editing number %o %o", this.currentBufferNum, btext);
     var te = document.getElementById('text-edit');
     console.log("got text edit textarea?? %o", te);
     te.innerHTML = btext;
-
   };
 
-  this.salva = function() {
-    console.log("Saving!");
-    this.setContent($('#text-edit').val());
-    console.log("Set content");
+  this.saveClicked = function() {
+    var elem = document.getElementById('text-edit');
+    if (!elem) {
+      console.error("Cannot find #text-edit, cannot save");
+      return;
+    }
+    console.log("Saving!, setting content to %s", elem.value);
+    this.setContent(elem.value);
+    this.closeEditor();
+  };
+
+  this.abortClicked = function() {
+    console.log("Called abortClicked");
+    this.closeEditor();
+  };
+
+  this.closeEditor = function() {
     $('#editor').fadeOut();
     KeyboardJS.enable();
-  };
-
-  this.abort = function() {
-    console.log("Called abort");
-    $('#editor').fadeOut();
-    KeyboardJS.enable();
-  };
-
+  }
 
   this.reset = function() {
-    this.idx = 0;
+    this.currentBuffer().reset();
   };
 
-  this.toggleLock = function() {
+  this.toggleLock = function(lockstate) {
     console.log("Invocata toggleLock");
-    this.locked = !this.locked;
+    if (lockstate == undefined)
+      this.locked = !this.locked;
+    else
+      this.locked = lockstate;
     SparaConcetti.message(this.locked ? 'Locked' : 'Unlocked');
   };
 
   // Sets content of buf (current if not specified) to txt;
   // Invoked by drag or Save
-  this.setContent = function(txt, buf) {
-    var bts = buf || this.currentBuffer;
-    this.textBuffers[bts] = txt;
-    this.buffers[bts] = this.tokenize(txt);
+  this.setContent = function(txt, bufnum) {
+    var bts = bufnum || this.currentBufferNum;
+    console.log("setContent on buffer %i", bts);
+    this.buffers[bts] = new SparaBuffer(txt);
     this.saveToRemote(bts);
-    this.idx = 0;
   };
 
-  // Duplicate of one in Buffer. I want to keep just that!
-  this.tokenize = function(txt) {
-    if (!txt) return [];
-    if (typeof txt === 'object') return txt;
-    if (typeof txt === 'string') return txt.split(/\s+/);
-    console.log("Don't know how to tokenize: %o", txt);
-    return [];
-  }
-
+    
 
   // Changed buffer to n
   this.changeBuffer  = function(num) {
-    this.currentBuffer = num;
-    this.idx = 0;
+    this.currentBufferNum = num;
+    this.currentBuffer().reset();
     SparaConcetti.message("Buf: " + num);
   };
 

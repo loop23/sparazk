@@ -4,18 +4,20 @@ var Vista = function(spara, dom_id) {
   console.log("Initializing Vista with %o", spara);
   var show = false;
   this.spara = spara
-  this.bpm = 180;
+  this.bpm = 10;
   this.lastTap = null;
 
   this.tick = function() {
     if (show) {
-      var nt = spara.getNext();
-      dom_id.text(nt).fadeIn(30000/this.bpm/1.3);
+      var next_token = spara.getNext();
+      dom_id.text(next_token).fadeIn(30000/this.bpm/1.3);
     }
-    else
+    else {
       dom_id.fadeOut(30000/this.bpm/1.3);
+    }
     show = !show;
   }.bind(this);
+  
   this.toggleSpara = function() {
     if (this.timerId) {
       console.log("Stopping");
@@ -26,18 +28,21 @@ var Vista = function(spara, dom_id) {
       this.restartTimer();
     }
   };
+
   this.speedPlus = function(amt) {
     if (!amt) amt = 1;
     this.bpm = this.bpm + amt;
     if (this.bpm > 400) this.bpm = 400;
     this.restartTimer();
   };
+
   this.speedMinus = function(amt) {
     if (!amt) amt = 1;
     this.bpm = this.bpm - amt;
     if (this.bpm < 5) this.bpm = 5;
     this.restartTimer();
   };
+
   this.tapTempo = function() {
     var now = new Date().valueOf();
     var tdiff = now - this.lastTap;
@@ -48,8 +53,9 @@ var Vista = function(spara, dom_id) {
     };
     this.lastTap = now;
   },
+
   this.restartTimer = function() {
-    console.log("Restarting timer, bpm is %o", this.bpm);
+    console.log("Starting or Restarting timer, bpm is %o", this.bpm);
     if (this.timerId) {
      window.clearInterval(this.timerId);
      this.timerId = undefined;
@@ -57,6 +63,7 @@ var Vista = function(spara, dom_id) {
     this.timerId = window.setInterval(this.tick, 30000/this.bpm);
     SparaConcetti.message("BPM: " + this.bpm);
   };
+
   this.restartTimer();
   console.log("Initialized, timer: %i, dom_id: %o", this.timerId, dom_id);
 };
